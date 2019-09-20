@@ -1,24 +1,23 @@
-<core:FragmentDefinition 
-	xmlns:core='sap.ui.core' 
-	xmlns="sap.viz.ui5.controls" 
-	xmlns:data="sap.viz.ui5.data"
+<core:FragmentDefinition xmlns:core='sap.ui.core' xmlns="sap.viz.ui5.controls" xmlns:data="sap.viz.ui5.data"
 	xmlns:feeds="sap.viz.ui5.controls.common.feeds">
-
-<VizFrame vizType="bar" vizProperties="{ title: { text: 'Vendas por ano', style: { color: 'orange' }  } }">
+	<VizFrame vizType="column" vizProperties="{chart>/}">
 		<dataset>
 			<data:FlattenedDataset data="{/SalesByRegions}">
 				<data:dimensions>
-					<data:DimensionDefinition name="Ano" value="{Year}" />
+					<data:DimensionDefinition name="Ano" value="{Year}"/>
+					<data:DimensionDefinition name="Região" value="{Region}"/>
 				</data:dimensions>
 				<data:measures>
-					<data:MeasureDefinition name="Total" value="{Revenue}" />
+					<data:MeasureDefinition name="Total" value="{Revenue}"/>
+					<data:MeasureDefinition name="Objetivo" value="{= ${Revenue} / 2 }"/>
 				</data:measures>
 			</data:FlattenedDataset>
 		</dataset>
 		<feeds>
-			<feeds:FeedItem type="Dimension" values="Ano" uid="categoryAxis" />
-			<feeds:FeedItem type="Measure" values="Total" uid="valueAxis" />
+			<feeds:FeedItem type="Dimension" values="Ano" uid="categoryAxis"/>
+			<feeds:FeedItem type="Dimension" values="Região" uid="categoryAxis"/>
+			<feeds:FeedItem type="Measure" values="Total" uid="valueAxis"/>
+			<feeds:FeedItem type="Measure" values="Objetivo" uid="valueAxis"/>
 		</feeds>
 	</VizFrame>
-	
 </core:FragmentDefinition>
